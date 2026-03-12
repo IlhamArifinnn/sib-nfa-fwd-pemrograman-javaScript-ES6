@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tugas 2 - Javascript: Data Pegawai</title>
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 960px;
+        margin: auto;
+        background-color: #fff;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      h2 {
+        text-align: center;
+        color: #333;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 12px;
+        text-align: center;
+      }
+
+      th {
+        background-color: #f2f2f2;
+      }
+
+      tfoot td {
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Tugas 2 - JavaScript: Data Pegawai</h2>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Nama Pegawai</th>
+            <th>Umur</th>
+            <th>Jabatan</th>
+            <th>Status</th>
+            <th>Gaji Pokok</th>
+            <th>Tunjangan Jabatan (15%)</th>
+            <th>BPJS (10%)</th>
+            <th>Tunjangan Keluarga (20% Jika Sudah Menikah)</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td id="nama"></td>
+            <td id="umur"></td>
+            <td id="jabatan"></td>
+            <td id="status"></td>
+            <td id="gajiPokok"></td>
+            <td id="tunjanganJabatan"></td>
+            <td id="BPJS"></td>
+            <td id="tunjanganKeluarga"></td>
+          </tr>
+        </tbody>
+
+        <tfoot>
+          <tr>
+            <th colspan="7">
+              Total Gaji (Gaji Pokok + Tunjangan Jabatan + BPJS + Tunjangan
+              Keluarga)
+            </th>
+            <td id="totalGaji"></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <script>
+      const dataPegawai = {
+        nama: "Dodi Prayodi",
+        umur: 25,
+        jabatan: "Manajer",
+        status: "Menikah",
+      };
+
+      gajiPokok = 0;
+      if (dataPegawai.jabatan === "Manajer") {
+        gajiPokok = 15000000;
+      } else if (dataPegawai.jabatan === "Asisten Manajer") {
+        gajiPokok = 10000000;
+      } else if (dataPegawai.jabatan === "Staff") {
+        gajiPokok = 5000000;
+      }
+
+      tunjanganJabatan = (15 / 100) * gajiPokok;
+      BPJS = (10 / 100) * gajiPokok;
+      tunjanganKeluarga = 0;
+      if (dataPegawai.status === "Menikah") {
+        tunjanganKeluarga = (20 / 100) * gajiPokok;
+      }
+
+      totalGaji = gajiPokok + tunjanganJabatan + tunjanganKeluarga - BPJS;
+
+      // Format dalam format mata uang Rupiah
+      const formatRupiah = (number) => {
+        return new Intl.NumberFormat("id-ID", {
+          style: "currency",
+          currency: "IDR",
+          maximumFractionDigits: 0,
+        }).format(number);
+      };
+
+      gajiPokok = formatRupiah(gajiPokok);
+      tunjanganJabatan = formatRupiah(tunjanganJabatan);
+      BPJS = formatRupiah(BPJS);
+      tunjanganKeluarga = formatRupiah(tunjanganKeluarga);
+      totalGaji = formatRupiah(totalGaji);
+
+      document.getElementById("nama").textContent = dataPegawai.nama;
+      document.getElementById("umur").textContent = dataPegawai.umur;
+      document.getElementById("jabatan").textContent = dataPegawai.jabatan;
+      document.getElementById("status").textContent = dataPegawai.status;
+      document.getElementById("gajiPokok").textContent = gajiPokok;
+      document.getElementById("tunjanganJabatan").textContent =
+        tunjanganJabatan;
+      document.getElementById("BPJS").textContent = BPJS;
+      document.getElementById("tunjanganKeluarga").textContent =
+        tunjanganKeluarga;
+      document.getElementById("totalGaji").textContent = totalGaji;
+    </script>
+  </body>
+</html>
