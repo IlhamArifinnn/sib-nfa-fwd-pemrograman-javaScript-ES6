@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tugas Pertemuan 5 - Manajemen Produk</title>
+  </head>
+  <body>
+    <h1>Tugas Pertemuan 5 - Manajemen Produk</h1>
+    
+
+    <script>
+      // Data Produk
+      const productList = [
+        {
+          id: 1,
+          nama: "Laptop",
+          harga: "12000000",
+        },
+        {
+          id: 2,
+          nama: "Smartphone",
+          harga: "5000000",
+        },
+        {
+          id: 3,
+          nama: "Headphones",
+          harga: "1500000",
+        },
+        {
+          id: 4,
+          nama: "Smartwatch",
+          harga: "2000000",
+        },
+        {
+          id: 5,
+          nama: "Tablet",
+          harga: "3000000",
+        },
+      ];
+
+      // menambahkan produk baru dengan spread operator
+      const tambahProduk = (id, nama, harga) => {
+        const produkBaru = { id, nama, harga };
+        productList.push(produkBaru);
+      };
+
+      // menghapus produk dengan rest parameter
+      const hapusProduk = (id) => {
+        const index = productList.findIndex((produk) => produk.id === id);
+        if (index !== -1) {
+          productList.splice(index, 1);
+        } else {
+          console.log(`Produk dengan ID ${id} tidak ditemukan.`);
+        }
+      };
+
+      // menampilkan daftar produk dengan destructuring
+      const tampilkanProduk = () => {
+        console.log("Daftar Produk:");
+        productList.forEach(({ id, nama, harga }) => {
+          console.log(`ID: ${id}, Nama: ${nama}, Harga: ${harga}`);
+        });
+      };
+
+      tampilkanProduk();
+      // Contoh penggunaan data
+      tambahProduk(6, "Speaker", "800000");
+      console.log("\nSetelah menambahkan produk baru:");
+      tampilkanProduk();
+      hapusProduk(2);
+      console.log("\nSetelah menghapus produk dengan ID 2:");
+      tampilkanProduk();
+    </script>
+  </body>
+</html>
